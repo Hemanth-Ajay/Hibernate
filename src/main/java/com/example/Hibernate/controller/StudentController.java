@@ -1,11 +1,15 @@
 package com.example.Hibernate.controller;
 
+import com.example.Hibernate.entity.UserEntity;
+import com.example.Hibernate.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
+import com.example.Hibernate.dto.ResponseModel;
 import com.example.Hibernate.entity.StudentEntity;
 import com.example.Hibernate.service.StudentService;
 
@@ -13,17 +17,37 @@ import com.example.Hibernate.service.StudentService;
 @RequestMapping("/student")
 public class StudentController {
 
+    @Autowired
+    private StudentService studentService;
 	@Autowired
-	private StudentService studentService;
+	private UserService userService;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
-	@GetMapping("getById/{id}")
-	private StudentEntity getByStudentId(@PathVariable Long id) {
-		if (id == 0) {
-			throw new IllegalStateException("Id Field should not be empty");
-		}
-		StudentEntity enStudentEntity = studentService.getByStudentId(id);
-		return enStudentEntity;
+
+    @GetMapping("/getById/{id}")
+    private StudentEntity getByStudentId(@PathVariable Long id) {
+        if (id == 0) {
+            throw new IllegalStateException("Id Field should not be empty");
+        }
+        StudentEntity enStudentEntity = studentService.getByStudentId(id);
+        return enStudentEntity;
+
+    }
+
+	@PutMapping("/update/{id}")
+	private ResponseEntity<?> updateStudentDetails(@PathVariable Long id, @RequestBody StudentEntity entity) {
+		StudentEntity updateStudentDetails = studentService.updateStudentDetails(id, entity);
+
+		return ResponseEntity.ok(updateStudentDetails);
 
 	}
+
+   @PostMapping("/createuser")
+	private UserEntity createUser(@RequestBody UserEntity userEntity){
+		userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+	   UserEntity user = userService.saveUser(userEntity);
+	   return user;
+   }
 
 }

@@ -7,5 +7,5 @@ import com.example.Hibernate.entity.StudentEntity;
 
 @Repository
 public interface StudentRepository extends JpaRepository<StudentEntity, Long> {
-	StudentEntity findByEmailId(String emailId);
+	public StudentEntity findByEmailId(String emailId);
 }
