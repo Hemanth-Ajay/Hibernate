@@ -1,5 +1,7 @@
 package com.example.Hibernate.entity;
+
 import lombok.Data;
+
 import javax.persistence.*;
 
 
@@ -10,12 +12,12 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userId", nullable = false)
     private Long userId;
-    @Column(name = "UserName",nullable = false)
+    @Column(name = "UserName", nullable = false)
     private String username;
-    @Column(name = "Password",nullable = false)
+    @Column(name = "Password", nullable = false)
     private String password;
-    @Column(name = "Roles",nullable = false)
+    @Column(name = "Roles", nullable = false)
     private String roles;
-    @Column(name = "IsActive",nullable = false)
+    @Column(name = "IsActive", nullable = false)
     private boolean isActive;
 }

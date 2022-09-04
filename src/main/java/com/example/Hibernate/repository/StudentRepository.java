@@ -1,11 +1,10 @@
 package com.example.Hibernate.repository;
 
+import com.example.Hibernate.entity.StudentEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.Hibernate.entity.StudentEntity;
-
 @Repository
 public interface StudentRepository extends JpaRepository<StudentEntity, Long> {
-	public StudentEntity findByEmailId(String emailId);
+    public StudentEntity findByEmailId(String emailId);
 }

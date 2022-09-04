@@ -9,13 +9,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @SpringBootApplication
 public class HibernateApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(HibernateApplication.class, args);
-	}
-	
-	@Bean
-	public PasswordEncoder getPasswordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(HibernateApplication.class, args);
+    }
+
+    @Bean
+    public PasswordEncoder getPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
 }
